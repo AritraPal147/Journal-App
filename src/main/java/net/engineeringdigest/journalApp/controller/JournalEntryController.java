@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -66,10 +65,10 @@ public class JournalEntryController {
         String userName = authentication.getName();
         User user = userService.findByUsername(userName);
         List<JournalEntry> collect = user.getJournalEntries()
-                        .stream()
-                        .filter(
-                                x -> x.getId().equals(id)
-                        ).collect(Collectors.toList()
+                .stream()
+                .filter(
+                        x -> x.getId().equals(id)
+                ).collect(Collectors.toList()
                 );
         if (!collect.isEmpty()) {
             Optional<JournalEntry> journalEntry = journalEntryService.getEntryById(id);
