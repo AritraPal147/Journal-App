@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 // Controller class for CRUD operations on Journal Entries
 @RestController
-@RequestMapping("/journal")
 public class JournalEntryController {
 
     // Bean for JournalEntryService

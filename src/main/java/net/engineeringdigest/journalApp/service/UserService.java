@@ -1,8 +1,8 @@
 package net.engineeringdigest.journalApp.service;
 
+import lombok.RequiredArgsConstructor;
 import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -12,11 +12,12 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     public void saveNewUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
