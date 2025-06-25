@@ -29,7 +29,6 @@ public class QuoteService {
                 entity,
                 QuoteResponse.class
         );
-        System.out.println("Hello world");
         return response.getBody();
     }
 
