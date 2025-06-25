@@ -2,6 +2,7 @@ package net.engineeringdigest.journalApp.service;
 
 import lombok.RequiredArgsConstructor;
 import net.engineeringdigest.journalApp.api.response.QuoteResponse;
+import net.engineeringdigest.journalApp.cache.AppCache;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,8 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class QuoteService {
 
-    private static final String api =
-            "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en";
+    private final AppCache appCache;
     private final RestTemplate restTemplate;
 
     public QuoteResponse getQuote() {
@@ -24,7 +24,7 @@ public class QuoteService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<QuoteResponse> response = restTemplate.exchange(
-                api,
+                appCache.getAppCache().get(AppCache.Keys.QUOTE_API.name()),
                 HttpMethod.GET,
                 entity,
                 QuoteResponse.class
